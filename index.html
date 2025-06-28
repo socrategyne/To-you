@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PCM Scientific Calculator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, #111, #000);
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 28px;
+      text-shadow: 0 0 10px #0ff;
+    }
+
+    .dedication {
+      font-size: 14px;
+      color: #0ff;
+      margin-bottom: 15px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #0ff;
+      }
+      to {
+        text-shadow: 0 0 25px #0ff, 0 0 30px #0ff;
+      }
+    }
+
+    #calculator {
+      background: #222;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #0ff;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    #display {
+      width: 100%;
+      font-size: 22px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background: #000;
+      color: #0f0;
+      text-align: right;
+      margin-bottom: 15px;
+      box-shadow: inset 0 0 5px #0f0;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #444;
+      color: #fff;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0ff;
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .wide {
+      grid-column: span 2;
+      background: crimson;
+    }
+
+    @media (max-height: 500px) {
+      body {
+        padding: 20px;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Scientific Calculator</h1>
+  <div class="dedication">🌟 Special Dedication to My Beloved PCMs 🌟</div>
+
+  <div id="calculator">
+    <input type="text" id="display" readonly />
+    <div class="buttons">
+      <button onclick="press('7')">7</button>
+      <button onclick="press('8')">8</button>
+      <button onclick="press('9')">9</button>
+      <button onclick="press('/')">÷</button>
+
+      <button onclick="press('4')">4</button>
+      <button onclick="press('5')">5</button>
+      <button onclick="press('6')">6</button>
+      <button onclick="press('*')">×</button>
+
+      <button onclick="press('1')">1</button>
+      <button onclick="press('2')">2</button>
+      <button onclick="press('3')">3</button>
+      <button onclick="press('-')">−</button>
+
+      <button onclick="press('0')">0</button>
+      <button onclick="press('.')">.</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="press('+')">+</button>
+
+      <button onclick="press('(')">(</button>
+      <button onclick="press(')')">)</button>
+      <button onclick="press('Math.PI')">π</button>
+      <button onclick="press('Math.E')">e</button>
+
+      <button onclick="press('Math.sin(')">sin</button>
+      <button onclick="press('Math.cos(')">cos</button>
+      <button onclick="press('Math.tan(')">tan</button>
+      <button onclick="press('Math.sqrt(')">√</button>
+
+      <button onclick="press('Math.log10(')">log</button>
+      <button onclick="press('**')">^</button>
+      <button class="wide" onclick="clearDisplay()">C</button>
+    </div>
+  </div>
+
+  <script>
+    let input = '';
+
+    function press(val) {
+      input += val;
+      document.getElementById("display").value = input;
+    }
+
+    function calculate() {
+      try {
+        const result = eval(input);
+        input = result.toString();
+        document.getElementById("display").value = input;
+      } catch {
+        document.getElementById("display").value = "Error";
+        input = '';
+      }
+    }
+
+    function clearDisplay() {
+      input = '';
+      document.getElementById("display").value = '';
+    }
+  </script>
+</body>
+</html>
